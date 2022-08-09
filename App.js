@@ -1,21 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { MainNavigator } from './src/navigation/MainNavigator'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { observer } from 'mobx-react-lite';
+import { NavigationContainer } from '@react-navigation/native';
+import { LoginNavigator } from './src/navigation/LoginNavigator'
 
 export default function App() {
+  useInitUser()
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <StatusBar style="auto" />
+        <NavigatorSwitch />
+      </NavigationContainer>
+    </SafeAreaProvider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const NavigatorSwitch = observer(() => {
+  if (true) {   //auth funcc
+    return <LoginNavigator />
+  }else {
+    return <MainNavigator />
+  }
+})
